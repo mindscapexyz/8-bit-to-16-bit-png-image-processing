@@ -14,4 +14,6 @@ def convert_image():
 if __name__ == "__main__":
     # Initialize parser
     parser = argparse.ArgumentParser()
-    parser.parse_args()
+    parser.add_argument("-i", "--input", help="8-bit input image path to be converted")
+    parser.add_argument("-o", "--output", help="16-bit output image path result")
+    args = parser.parse_args()
