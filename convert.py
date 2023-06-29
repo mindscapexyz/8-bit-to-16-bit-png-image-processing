@@ -1,14 +1,16 @@
-import numpy as np
 import cv2
 import argparse
 
 
-def convert_image():
-    i = cv2.imread(
-        imgNameIn, cv2.CV_LOAD_IMAGE_COLOR
+def convert_image(input_path, output_path):
+    img = cv2.imread(
+        input_path, cv2.CV_LOAD_IMAGE_COLOR
     )  # Need to be sure to have a 8-bit input
-    img = np.array(i, dtype=np.uint16)  # This line only change the type, not values
-    img *= 256  # Now we get the good values in 16 bit format
+    convert = cv2.normalize(
+        img, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX
+    )
+
+    cv2.imwrite(convert, output_path)
 
 
 if __name__ == "__main__":
