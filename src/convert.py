@@ -6,16 +6,19 @@ import numpy as np
 
 def convert_image(input_path, output_path):
     if os.path.exists(input_path):
-        img = cv2.imread(input_path, 1)  # Need to be sure to have a 8-bit input
-        img = np.array(
-            img, dtype=np.uint16
-        )  # This line only change the type, not values
-        img *= 256  # Now we get the good values in 16 bit format
+        try:
+            img = cv2.imread(input_path, 1)  # Need to be sure to have a 8-bit input
+            img = np.array(
+                img, dtype=np.uint16
+            )  # This line only change the type, not values
+            img *= 256  # Now we get the good values in 16 bit format
 
-        status = cv2.imwrite(output_path, img)
-        print("Conversion succeded!")
+            status = cv2.imwrite(output_path, img)
+            print("Conversion succeded!")
+        except Exception as e:
+            print("Something going wrong:", e)
     else:
-        print("Failed")
+        print("File path does not exist")
 
 
 if __name__ == "__main__":
